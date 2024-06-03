@@ -1,13 +1,17 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+const connectDb = require("./mongoDbConnection");
+const createError = require("http-errors");
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
 
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+const signUpRouter = require("./routes/signUp");
+const usersRouter = require("./routes/users");
+const Users = require("./models/Users");
 
-var app = express();
+const app = express();
+
+connectDb();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -19,8 +23,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
+app.use("/signUp", signUpRouter);
 app.use("/users", usersRouter);
+//the default path is / so im redirecting it to /signUp
+app.use("/", async () => {
+  res.redirect("/signUp");
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
