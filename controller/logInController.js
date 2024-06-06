@@ -14,7 +14,7 @@ exports.logIn_auth = passport.authenticate("local", function (err, user, info) {
     }
     return res.redirect("/dashboard");
   });
-})(req, res, next);
+});
 
 exports.logIn_firstPage = (req, res) => {
   res.render("logIn", { errors: null });

@@ -6,9 +6,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const passport = require("passport");
-const localStrategy = require("passport-local").Strategy;
 const session = require("express-session");
-const { throws } = require("assert");
 
 //passport things
 require("./passportStrategy");
@@ -17,9 +15,6 @@ require("./passportStrategy");
 const signUpRouter = require("./routes/signUp");
 const logInRouter = require("./routes/logIn");
 const dashboardRouter = require("./routes/dashboard");
-
-// models
-const Users = require("./models/Users");
 
 const app = express();
 
@@ -42,7 +37,6 @@ app.use(passport.session());
 
 //routes
 app.use("/signUp", signUpRouter);
-app.use("/users", usersRouter);
 app.use("/logIn", logInRouter);
 app.use("/dashboard", dashboardRouter);
 

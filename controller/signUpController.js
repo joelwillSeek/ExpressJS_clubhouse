@@ -1,3 +1,6 @@
+const Users = require("../models/Users");
+const validator = require("express-validator").validationResult;
+
 exports.signUp_firstPage = function (req, res, next) {
   res.render("signUp", {
     title: "Sign Up Page",

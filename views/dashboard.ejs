@@ -9,6 +9,8 @@
     <nav>
         <img src="../public/images/default pic for porfolio.png" alt="">
         <div class="status">
+
+            <label for="#fullName">Full Name</label>
             <% if (!user.membership) { %>
                 <label for="#membership">Membership</label>
                 <img src="../public/images/not.png" alt="No" id="membership">
@@ -19,13 +21,19 @@
 
             <% if (!user.isAdmin) { %>
                 <label for="#isAdmin">Admin</label>
-                <img src="../public/images/not.png" alt="No" id="membership">
+                <img src="../public/images/not.png" alt="No" id="admin">
             <% }else{ %>
                 <label for="#isAdmin">Admin</label>
-                <img src="../public/images/succes.png" alt="yes" id="membership">
+                <img src="../public/images/succes.png" alt="yes" id="admin">
             <%}%>
             
         </div>
     </nav>
+
+    <div class="messagesBox">
+        <h4>Author</h4>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, ea!</p>
+        <p>20/12/2020</p>
+    </div>
 </body>
 </html>
