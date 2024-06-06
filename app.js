@@ -1,33 +1,54 @@
+// imports
 const connectDb = require("./mongoDbConnection");
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const passport = require("passport");
+const localStrategy = require("passport-local").Strategy;
+const session = require("express-session");
+const { throws } = require("assert");
 
+//passport things
+require("./passportStrategy");
+
+// routes imports
 const signUpRouter = require("./routes/signUp");
-const usersRouter = require("./routes/users");
+const logInRouter = require("./routes/logIn");
+const dashboardRouter = require("./routes/dashboard");
+
+// models
 const Users = require("./models/Users");
 
 const app = express();
 
+//connecting to mongodb
 connectDb();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+// middlewares
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(session({ secret: "cat", resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
+//routes
 app.use("/signUp", signUpRouter);
 app.use("/users", usersRouter);
+app.use("/logIn", logInRouter);
+app.use("/dashboard", dashboardRouter);
+
 //the default path is / so im redirecting it to /signUp
-app.use("/", async () => {
-  res.redirect("/signUp");
+app.use("/", async (req, res) => {
+  res.redirect("/logIn");
 });
 
 // catch 404 and forward to error handler

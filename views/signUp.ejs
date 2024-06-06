@@ -11,13 +11,16 @@
       <input type="text" name="email" placeholder="Email" required/>
       <input type="password" name="password" placeholder="Password" required/>
       <input type="password" name="confirmPassword" placeholder="Confirm Password" required/>
-      <% if(wrongPassword){%>
-        <p>Passwords do not match</p>
-      <%}else if(fieldNotFilled){%>
-        <p>Please fill out all fields</p>
-      <%}%>
+      <% if(errors!=null&&errors.isArray()) {%>
+        <% for(let i = 0; i < errors.length; i++) {%>
+          <p><%=errors[i].msg%></p>
+        <%}%>
+    <% } else if(errors!=null) { %>
+          <p><%=errors.msg%></p>
+    <%}%>
       <br />
       <input type="submit" value="Submit" />
+      <a href="/logIn">Already have an account</a>
     </form>
   </body>
 </html>

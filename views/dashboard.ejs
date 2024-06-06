@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DashBoard</title>
+</head>
+<body>
+    <nav>
+        <img src="../public/images/default pic for porfolio.png" alt="">
+        <div class="status">
+            <% if (!user.membership) { %>
+                <label for="#membership">Membership</label>
+                <img src="../public/images/not.png" alt="No" id="membership">
+            <% }else{ %>
+                <label for="#membership">Membership</label>
+                <img src="../public/images/succes.png" alt="yes" id="membership">
+            <%}%>
+
+            <% if (!user.isAdmin) { %>
+                <label for="#isAdmin">Admin</label>
+                <img src="../public/images/not.png" alt="No" id="membership">
+            <% }else{ %>
+                <label for="#isAdmin">Admin</label>
+                <img src="../public/images/succes.png" alt="yes" id="membership">
+            <%}%>
+            
+        </div>
+    </nav>
+</body>
+</html>
