@@ -11,7 +11,7 @@
       <input type="text" name="email" placeholder="Email" required/>
       <input type="password" name="password" placeholder="Password" required/>
       <input type="password" name="confirmPassword" placeholder="Confirm Password" required/>
-      <% if(errors!=null&&errors.isArray()) {%>
+      <% if(errors!=null&&typeof errors=="Array") {%>
         <% for(let i = 0; i < errors.length; i++) {%>
           <p><%=errors[i].msg%></p>
         <%}%>

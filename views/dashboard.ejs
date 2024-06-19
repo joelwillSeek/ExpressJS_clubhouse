@@ -7,10 +7,11 @@
 </head>
 <body>
     <nav>
-        <img src="../public/images/default pic for porfolio.png" alt="">
-        <div class="status">
-
+        <div class="porfolio"><img src="../public/images/default pic for porfolio.png" alt="">
             <label for="#fullName">Full Name</label>
+        </div>
+        
+        <div class="status">
             <% if (!user.membership) { %>
                 <label for="#membership">Membership</label>
                 <img src="../public/images/not.png" alt="No" id="membership">
@@ -30,10 +31,25 @@
         </div>
     </nav>
 
+<% for(let i=0;i<msg.length;i++){ %>
     <div class="messagesBox">
-        <h4>Author</h4>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, ea!</p>
-        <p>20/12/2020</p>
+        <h4><%=msg[i].author.fullName%></h4>
+        <p><%=msg[i].description%></p>
+        <p><%=msg[i].timeStamp%></p>
     </div>
+
+<% } %>
+
+<% if (error) { %>
+ <p><%error%></p>
+<% } %> 
+
+<form method="post" action="/dashboard/createNewMessage" >
+    <input type="text" placeholder="Enter Message" class="message" name="messageValue">
+    <input type="submit" value="Send">
+    
+</form>
+
+
 </body>
 </html>
