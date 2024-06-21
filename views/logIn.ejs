@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LogIn Page</title>
+    <link rel="stylesheet" href="/stylesheets/LogInAndSignUp.css">
 </head>
 <body>
-    <form action="/logIn" method="post">
+    <form action="/logIn" method="post" >
         <h1>Log In</h1>
         <input type="text" name="email" placeholder="Email" required/>
         <input type="password" name="password" placeholder="Password" required/>
         <input type="password" name="confirmPassword" placeholder="Confirm Password" required/>
-        <input type="text" name="secretKey" placeholder="(Optional) Membership secret key "/>
+        
         <% if(errors!=null&&typeof errors == "Array") {%>
             <% for(let i = 0; i < errors.length; i++) {%>
               <p><%=errors[i].msg%></p>

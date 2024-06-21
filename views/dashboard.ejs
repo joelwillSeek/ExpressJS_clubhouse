@@ -1,55 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DashBoard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DashBoard</title>
+<link rel="stylesheet" href="/stylesheets/dashboard.css">
 </head>
+
 <body>
-    <nav>
-        <div class="porfolio"><img src="../public/images/default pic for porfolio.png" alt="">
-            <label for="#fullName">Full Name</label>
-        </div>
-        
-        <div class="status">
-            <% if (!user.membership) { %>
-                <label for="#membership">Membership</label>
-                <img src="../public/images/not.png" alt="No" id="membership">
-            <% }else{ %>
-                <label for="#membership">Membership</label>
-                <img src="../public/images/succes.png" alt="yes" id="membership">
-            <%}%>
-
-            <% if (!user.isAdmin) { %>
-                <label for="#isAdmin">Admin</label>
-                <img src="../public/images/not.png" alt="No" id="admin">
-            <% }else{ %>
-                <label for="#isAdmin">Admin</label>
-                <img src="../public/images/succes.png" alt="yes" id="admin">
-            <%}%>
-            
-        </div>
-    </nav>
-
-<% for(let i=0;i<msg.length;i++){ %>
-    <div class="messagesBox">
-        <h4><%=msg[i].author.fullName%></h4>
-        <p><%=msg[i].description%></p>
-        <p><%=msg[i].timeStamp%></p>
+  <nav>
+    <div class="porfolio">
+      <img src="/images/default pic for porfolio.png" alt="" style="width: 40px;">
+      <label for="#fullName"><%=user.fullName%></label>
     </div>
 
-<% } %>
+    <div class="status">
+      <% if (user.membership==false) { %>
+      <label for="#membership">Membership</label>
+      <img src="/images/not.png" alt="No" style="width: 20px;" id="membership">
+      <% }else{ %>
+      <label for="#membership">Membership</label>
+      <img src="/images/succes.png" alt="yes" style="width: 20px;" id="membership">
+      <%}%>
 
-<% if (error) { %>
- <p><%error%></p>
-<% } %> 
+      <% if (!user.isAdmin) { %>
+      <label for="#isAdmin">Admin</label>
+      <img src="/images/not.png" alt="No" style="width: 20px;" id="admin">
+      <% }else{ %>
+      <label for="#isAdmin">Admin</label>
+      <img src="/images/succes.png" alt="yes" style="width: 20px;" id="admin">
+      <%}%>
 
-<form method="post" action="/dashboard/createNewMessage" >
-    <input type="text" placeholder="Enter Message" class="message" name="messageValue">
-    <input type="submit" value="Send">
+        </div>
+        <form action="/dashboard/logOut" method="get">
+          <button class="logOut">Log Out</button>
+        </form>
+        
+    </nav>
+
+    <div class="messageDisplay">
+      <% for(let i=0;i<msg.length;i++){ %>
+        <% if (user.fullName==msg[i].author.fullName) { %>
+          <div class="myMessage">
+        <% }else{ %>
+          <div class="otherMessage">
+        <% } %>
+  
+          <% if (user.membership==true||user.isAdmin==true) { %>
+          <h4>
+            <%=msg[i].author.fullName%>
+          </h4>
+          <% } %>
+  
+          <p class="description">
+            <%=msg[i].description%>
+          </p>
+  
+          <% if (user.membership==true||user.isAdmin==true) { %>
+          <p>
+            <%=msg[i].timeStamp%>
+          </p>
+          <% } %>
+  
+          <% if (user.isAdmin==true) { %>
+          <button class="deleteMessageAdmin">Delete Message</button>
+          <% } %>
+        </div>
+  
+        <% } %>
+    </div>
+  
+
+      <% if (error) { %>
+      <p>
+        <%error%>
+      </p>
+      <% } %>
+      
+      <% if (user.isAdmin==false) { %>
+        <form method="post" action="/dashboard/createNewMessage" class="inputBox">
+            <input type="text" placeholder="Enter Message" class="message" name="messageValue">
+            <label class="sendingButton" for="sender">
+              <img src="/images/send-outline.svg" alt="">
+            </label>
+            <input type="submit" value="" id="sender">
+        </form>
+        <% } %>
+     
+
+
+
+      <script defer>
+        const deleteBtn = document.querySelector(".deleteMessageAdmin")
+        const message=document.querySelector(".description")
     
-</form>
+    
+        deleteBtn.addEventListener("click", async (event) => {
+            console.log("delete clicked")
+         const res =await fetch("/dashboard/deleteMessageAdmin", {
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({msg:message.textContent})
+          })
 
-
+            const data=await res.json()
+          if(data.success){
+            window.location.reload(true)
+          }
+        })
+      </script>
 </body>
+
 </html>

@@ -14,7 +14,7 @@ var http = require("http");
 
 var port = normalizePort(process.env.PORT || "3001");
 app.set("port", port);
- 
+
 /**
  * Create HTTP server.
  */
@@ -33,7 +33,7 @@ server.on("listening", onListening);
  * Normalize a port into a number, string, or false.
  */
 
-function normalizePort(val:any) {
+function normalizePort(val: any) {
   var port = parseInt(val, 10);
 
   if (isNaN(port)) {
@@ -53,7 +53,7 @@ function normalizePort(val:any) {
  * Event listener for HTTP server "error" event.
  */
 
-function onError(error:any) {
+function onError(error: any) {
   if (error.syscall !== "listen") {
     throw error;
   }
@@ -68,7 +68,7 @@ function onError(error:any) {
       break;
     case "EADDRINUSE":
       console.error(bind + " is already in use");
-      server.listen(port+=1);
+      server.listen((port += 1));
       //  process.exit(1);
       break;
     default:
@@ -83,7 +83,6 @@ function onError(error:any) {
 function onListening() {
   var addr = server.address();
   var bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
-  debug("Listening on " + bind); 
+  debug("Listening on " + bind);
   console.log("Listening at " + port);
 }
- 
