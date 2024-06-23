@@ -5,7 +5,8 @@
   "scripts": {
     "build": "copyfiles -u 1 views/**/*.ejs dist/views & copyfiles -u 1 public/**/* dist/public & npx tsc",
     "startTS": "node dist/bin/index.js",
-    "dev": "tsc -w & copyfiles -u 1 views/**/*.ejs dist/views & copyfiles -u 1 public/**/* dist/public & nodemon dist/bin/index.js"
+    "dev": "tsc -w & copyfiles -u 1 views/**/*.ejs dist/views & copyfiles -u 1 public/**/* dist/public & nodemon dist/bin/index.js",
+    "distBranch":" git subtree push --prefix=dist upload glitch-pages"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
