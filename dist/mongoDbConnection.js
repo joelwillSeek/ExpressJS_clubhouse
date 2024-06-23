@@ -13,7 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
-const uri = "mongodb://127.0.0.1:27017/clubhouse?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.6";
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
+const devUri = "mongodb://127.0.0.1:27017/clubhouse?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.6";
+const uri = process.env.MONGODB_URI || "";
 function connectDB() {
     return __awaiter(this, void 0, void 0, function* () {
         try {

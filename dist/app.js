@@ -30,7 +30,7 @@ const dashboardRoutes_1 = __importDefault(require("./routes/dashboardRoutes"));
 const app = (0, express_1.default)();
 //connecting to mongodb
 (0, mongoDbConnection_1.default)();
-// view engine setup  
+// view engine setup   
 app.set("views", path_1.default.join(__dirname, "views"));
 app.set("view engine", "ejs");
 // middlewares
