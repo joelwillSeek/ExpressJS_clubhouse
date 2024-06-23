@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
-const uri = "mongodb://127.0.0.1:27017/clubhouse?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.6";
+const devUri="mongodb://127.0.0.1:27017/clubhouse?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.6";
+const uri:string = process.env.MONGODB_URI||"";
 
 async function connectDB() {
   try {
