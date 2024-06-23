@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+NG+Modern:wght@100..400&display=swap');
+:root{
+    --primary-color:#E0E2DB;
+    --secondary-color:#2E3532;
+    --accent-color:#8B2635;
+}
+
+body,form{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    font-family: "Playwrite NG Modern", cursive;
+    font-optical-sizing: auto;
+    font-weight:700;
+    font-style: normal;
+}
+
+form{
+    background-color: var(--primary-color);
+    padding: 1rem;
+}
+
+form input{
+    margin:0 1rem;
+    padding:1rem;
+    background-color: #fff;
+    border: 1px solid rgb(168, 168, 168);
+    font-family: "Playwrite NG Modern", cursive;
+    font-optical-sizing: auto;
+    font-weight:700;
+    font-style: normal;
+}
+
+form input[type="submit"]{
+    padding: 1rem;
+    border: 0px;
+    font-family: "Playwrite NG Modern", cursive;
+    font-optical-sizing: auto;
+    font-weight:700;
+    color:#fff;
+    font-style: normal;
+    padding: 0.5rem 2rem;
+    background-color: var(--secondary-color);
+    margin-bottom: 1rem;
+    transition: background-color ease-in-out 300ms;
+}
+
+form input[type="submit"]{
+    background-color: var(--accent-color);
+}
+
+form a{
+    color: var(--secondary-color);
+    transition: color ease-in-out 300ms;
+}
+
+form a:hover{
+    color: var(--accent-color);
+}
+
+body{
+    background-color: var(--secondary-color);
+    width: 100%;
+    height: 100vh;
+}
+
+h1{
+    color: var(--accent-color);
+}
